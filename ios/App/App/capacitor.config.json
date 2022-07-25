@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "cocktail-app",
+	"webDir": "dist",
+	"bundledWebRuntime": false
+}
