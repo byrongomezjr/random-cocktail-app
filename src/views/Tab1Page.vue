@@ -2,7 +2,7 @@
   <ion-page>
     <ion-header>
       <ion-toolbar>
-        <ion-title>Random Cocktail App</ion-title>
+        <ion-title>Random Cocktail</ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content v-if="state.loading">
@@ -10,21 +10,28 @@
         <ion-spinner color="primary"></ion-spinner>
       </div>
     </ion-content>
-
+    <!--Tab One Content-->
     <ion-content v-else :fullscreen="true">
       <ion-refresher slot="fixed" @ionRefresh="doRefresh">
         <ion-refresher-content></ion-refresher-content>
       </ion-refresher>
+
+      <!--Main Image-->
       <ion-card>
         <img :src="state.randomCocktail.strDrinkThumb" />
+
+        <!--Main Header-->
         <ion-card-header>
           <ion-card-subtitle>
             {{ state.randomCocktail.strCategory }} | Served In
             {{ state.randomCocktail.strGlass }}
           </ion-card-subtitle>
+
+          <!--Main Cocktail Title-->
           <ion-card-title>{{ state.randomCocktail.strDrink }}</ion-card-title>
         </ion-card-header>
 
+        <!--Main Ingredients-->
         <ion-card-content>
           <p>{{ state.randomCocktail.strInstructions }}</p>
           <ion-list-header>
@@ -180,8 +187,7 @@ import {
   IonItem,
   IonRefresher,
   IonRefresherContent,
-} 
-from "@ionic/vue";
+} from "@ionic/vue";
 export default {
   name: "Tab1Page",
   components: {
@@ -225,17 +231,17 @@ export default {
     const doRefresh = (event: Event) => {
       fetchRandomCocktail(false);
       /* Event was casted as an HTMLInputElement */
-      /* I was stuck here - but stackoverflow helped me solve the problem.
+      /* I was stuck here - but stackoverflow came to the rescue.
       /* https://stackoverflow.com/questions/43176560/property-files-does-not-exist-on-type-eventtarget-error-in-typescript */
-      
+
       const input = event.target as HTMLInputElement;
 
-    if (!input.files?.length) {
+      if (!input.files?.length) {
         return;
-    }
+      }
 
-    const file = input.files[0];
-    console.log(file);
+      const file = input.files[0];
+      console.log(file);
     };
     fetchRandomCocktail(true);
     return {
@@ -246,3 +252,16 @@ export default {
   },
 };
 </script>
+
+<style>
+.loading-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 90vh;
+}
+
+ion-spinner {
+  transform: scale(1.5);
+}
+</style>
